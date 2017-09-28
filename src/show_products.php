@@ -1,16 +1,26 @@
 <?php
 
 define('__ROOT__', dirname(__FILE__, 2));
+
 require_once(__ROOT__.'/src/mysql.php'); 
+require_once(__ROOT__.'/src/memcached.php'); 
 
 if (!init_mysql()) {
-    $result = 'Failed';
-} else {
-    if (($result = select_products(100)) == false) {
-        $result = 'Select Failed';
-    } else {
-        $result = mysqli_num_rows($result);
-    }
+    $result = 'Failed init mysql';
+    error_log($result);
+    die(1);
+} 
+if (!init_memcached()) {
+    $result = 'Failed init memcached';
+    error_log($result);
+    die(1);
+}
+
+$products = select_products(40);
+$result = '';
+
+while ($item = mysqli_fetch_array($products)) {
+    $result .= "<li> $item[id] $item[name] $item[price] </li>";
 }
 ?>
 
