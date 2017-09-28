@@ -7,11 +7,11 @@ $mysqli = NULL;
 function init_mysql() {
     global $mysqli;
 
-    $db = parse_ini_file(__ROOT__.'/config/db.ini');
+    $db = parse_ini_file($GLOBALS['ROOT'].'/config/mysql.ini');
 
     $mysqli = mysqli_connect('p:'.$db['host'], $db['user'], $db['pwd'], $db['dbname'], $db['port']);
     if (!$mysqli) {
-            error_log('mysqli_connect faield (' . mysqli_connect_errno() . '): ' . mysqli_connect_error());
+            error_log('mysqli_connect failed (' . mysqli_connect_errno() . '): ' . mysqli_connect_error());
             return false;
     }
 
