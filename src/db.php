@@ -20,7 +20,6 @@ function init_mysql() {
     }
 
     return true;
-    
 }
 
 function select_products($count = 1000, $start_from = 0, $sort_by = "id", $ascending = true) {
