@@ -1,12 +1,16 @@
 <?php
 
-define('__ROOT__', dirname(dirname(__FILE__)));
-require_once(__ROOT__.'/src/db.php'); 
+define('__ROOT__', dirname(__FILE__, 2));
+require_once(__ROOT__.'/src/mysql.php'); 
 
 if (!init_mysql()) {
     $result = 'Failed';
 } else {
-    $result = $mysqli->host_info;
+    if (($result = select_products(100)) == false) {
+        $result = 'Select Failed';
+    } else {
+        $result = mysqli_num_rows($result);
+    }
 }
 ?>
 
