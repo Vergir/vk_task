@@ -18,7 +18,7 @@ function init_mysql() {
     return true;
 }
 
-function select_products($count = 1000, $start_from = 0, $sort_by = 'id', $ascending = true) {
+function mysql_select($count = 1000, $start_from = 0, $sort_by = 'id', $ascending = true) {
     global $mysqli;
 
     if (!in_array($sort_by, COLUMNS) 
@@ -40,10 +40,10 @@ function select_products($count = 1000, $start_from = 0, $sort_by = 'id', $ascen
         error_log(mysqli_error($mysqli));
     }
     
-    return $result;
+    return mysqli_fetch_all($result);
 }
 
-function create_product($name, $desc, $price, $img) {
+function mysql_insert($name, $desc, $price, $img) {
     global $mysqli;
 
     if (empty($name)
@@ -66,7 +66,7 @@ function create_product($name, $desc, $price, $img) {
     return $result;
 }
 
-function update_product($old_id, $name, $desc, $price, $img) {
+function mysql_update($old_id, $name, $desc, $price, $img) {
     global $mysqli;
 
     if (empty($old_id)
@@ -90,7 +90,7 @@ function update_product($old_id, $name, $desc, $price, $img) {
     return $result;
 }
 
-function delete_product($id) {
+function mysql_delete($id) {
     global $mysqli;
 
     if (empty($id))  {
