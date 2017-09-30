@@ -1,8 +1,7 @@
 <?php
 
-
-require_once($GLOBALS['ROOT'].'/src/mysql.php');
-require_once($GLOBALS['ROOT'].'/src/memcached.php');
+require_once(__ROOT__.'/model/mysql.php');
+require_once(__ROOT__.'/model/memcached.php');
 
 function init_data_access() {
     if (!init_mysql()) {
@@ -13,23 +12,27 @@ function init_data_access() {
     if (!init_memcached()) {
         $result = 'Failed init memcached';
         error_log($result);
-        return true;
+        return false;
     }
     return true;
 }
 
 function get_products($params) {
     $hash = md5(serialize($params));
+    $result = array('params' => $params);
 
     $cache_result = cache_get($hash);
     if ($cache_result) {
-        return $cache_result;
+        $result['products'] = $cache_result;
+        return $result;
     } else { 
         $sql_result = mysql_select($params['count'], $params['start_from'], $params['sort_by'], $params['ascending']);
         if ($sql_result) {
             cache_set($hash, $sql_result);
+            $result['products'] = $sql_result;
+            return $result;
         }
-        return $sql_result;
+        return false;
     }
 }
 
@@ -59,31 +62,5 @@ function delete_product($params) {
 
     return $query_result;
 }
-
-function output_something($arg1=40) {
-    if (!init_data_access()) {
-        return "Could not estabilish data access";
-    }
-
-    $params = array(
-        'count' => 100,
-        'start_from' => 0,
-        'sort_by' => 'id',
-        'ascending' => true);
-
-    $result = '';
-
-    $products = get_products($params);
-
-    if (!$products) {
-        $result = 'LMAO KEK';
-    } else {
-        foreach ($products as $item) {
-            $result .= "<li> $item[0] $item[1] $item[3] </li>";
-        }
-    }
-
-    return $result;
-}       
 
 ?>

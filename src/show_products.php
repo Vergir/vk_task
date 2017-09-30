@@ -1,15 +1,18 @@
 <?php
 
-require_once($GLOBALS['ROOT'].'/src/controller.php'); 
+define('__ROOT__', dirname('__FILE__', 2));
 
-$content = output_something();
+require_once(__ROOT__.'/controller/show_products_controller.php'); 
+
+$content = show_products();
+$js = file_get_contents('./javascript.html');
 
 ?>
 
 <!DOCTYPE html>
 <html>
-<body>
-<?php echo $content;?>
-
-</body>
+    <?php echo $js?>
+    <body>
+        <?php echo $content;?>
+    </body>
 </html> 

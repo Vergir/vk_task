@@ -14,7 +14,7 @@ function init_memcached() {
     }
     
     if (count($memcached->getServerList()) === 0) {
-        $mc = parse_ini_file($GLOBALS['ROOT'].'/config/memcached.ini');
+        $mc = parse_ini_file(__ROOT__.'/../config/memcached.ini');
         $memcached->addServer($mc['host'],$mc['port']);
     }
     return true;

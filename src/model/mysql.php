@@ -7,7 +7,7 @@ $mysqli = NULL;
 function init_mysql() {
     global $mysqli;
 
-    $db = parse_ini_file($GLOBALS['ROOT'].'/config/mysql.ini');
+    $db = parse_ini_file(__ROOT__.'/../config/mysql.ini');
 
     $mysqli = mysqli_connect('p:'.$db['host'], $db['user'], $db['pwd'], $db['dbname'], $db['port']);
     if (!$mysqli) {
