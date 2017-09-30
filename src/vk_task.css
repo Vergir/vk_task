@@ -1,0 +1,8 @@
+.product-list {
+    display: flex;
+    flex-flow: column nowrap;
+}
+.product {
+    display: flex;
+    flex-flow: row nowrap;
+}
