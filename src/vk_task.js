@@ -6,14 +6,14 @@ $(window).scroll(function () {
   if (isPreviousEventComplete && isDataAvailable) {
    
     isPreviousEventComplete = false;
-    //$(".LoaderImage").css("display", "block");
+    $(".loader-image").css("display", "block");
 
     $.ajax({
       type: "GET",
       url: $(".load_products").attr("href"),
       success: function (result) {
         isPreviousEventComplete = true;
-        //$(".LoaderImage").css("display", "none");
+        $(".loader-image").css("display", "none");
 
         if (result == '') { //When data is not available
             isDataAvailable = false;
@@ -27,5 +27,4 @@ $(window).scroll(function () {
       },
       error: function (error) {
           console.log(error);
-      }
-    });}}});
+      }});}}});

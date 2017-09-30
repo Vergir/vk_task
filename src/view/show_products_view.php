@@ -25,7 +25,6 @@ HTML;
 }
 
 function skin_product_list($data) {
-
     $params = $data['params'];
     $request_params = "sort=$params[sort_by]".
                       "&count=$params[count]".
@@ -37,16 +36,17 @@ function skin_product_list($data) {
     }
     
     $result = <<<HTML
-//TODO: hide (in CSS); Add CrUD buttons
-<a class="load_products" href="/load_products.php?$request_params">
+<a class="load_products invisible" href="/load_products.php?$request_params">
     Next
 </a>
 <div class="product-list">
     $list
 </div>
+<img class="loader-image" src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif"></img>
 HTML;
 
     return $result;
 }
+
 
 ?>

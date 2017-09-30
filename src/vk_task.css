@@ -1,8 +1,23 @@
+.outer {
+    display: flex;
+}
+
 .product-list {
     display: flex;
     flex-flow: column nowrap;
+    background-color: #ebac0c
 }
 .product {
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-evenly;
+    
+}
+
+.invisible {
+    display: none;
+}
+
+.loader-image {
+    display: flex; 
 }
