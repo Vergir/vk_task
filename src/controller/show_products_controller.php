@@ -1,5 +1,4 @@
 <?php
-
 require_once(__ROOT__.'/model/data_access.php');
 require_once(__ROOT__.'/view/show_products_view.php');
 

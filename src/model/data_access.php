@@ -1,7 +1,6 @@
 <?php
-
 require_once(__ROOT__.'/model/mysql.php');
-require_once(__ROOT__.'/model/memcached.php');
+require_once(__ROOT__.'/model/mc.php');
 
 function init_data_access() {
     if (!init_mysql()) {
@@ -9,7 +8,7 @@ function init_data_access() {
         error_log($result);
         return false;
     }
-    if (!init_memcached()) {
+    if (!init_mc()) {
         $result = 'Failed init memcached';
         error_log($result);
         return false;
@@ -23,6 +22,7 @@ function get_products($params) {
 
     $cache_result = cache_get($hash);
     if ($cache_result) {
+        error_log('cache');
         $result['products'] = $cache_result;
         return $result;
     } else { 
