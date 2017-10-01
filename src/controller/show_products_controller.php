@@ -3,7 +3,7 @@
 require_once(__ROOT__.'/model/data_access.php');
 require_once(__ROOT__.'/view/show_products_view.php');
 
-function show_products($arg1=40) {
+function show_products() {
     if (!init_data_access()) {
         return "Could not estabilish data access";
     }
@@ -13,8 +13,6 @@ function show_products($arg1=40) {
         'start_from' => 0,
         'sort_by' => 'id',
         'ascending' => true);
-
-    $result = '';
 
     $data = get_products($params);
 

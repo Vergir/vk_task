@@ -1,7 +1,7 @@
 <?php
-
 require_once(__ROOT__.'/model/data_access.php');
 require_once(__ROOT__.'/view/show_products_view.php');
+define('LINK_DELIMITER', '|');
 
 function construct_response($data) {
     $div_blocks = '';
@@ -16,7 +16,7 @@ function construct_response($data) {
                 "&start_from=$new_counter".
                 "&asc=$params[ascending]";
 
-    return $new_load_link.'|'.$div_blocks;
+    return $new_load_link.LINK_DELIMITER.$div_blocks;
 }
 
 function load_products() {

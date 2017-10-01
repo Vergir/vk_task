@@ -1,0 +1,35 @@
+@hard-sand: #ffcb92;
+@wet-sand: #b28654;
+@light-sand: #ffd7ab;
+@sea: #4293b2;
+@sky: #92e0ff;
+
+.flex {
+    display: flex
+}
+
+.product-list {
+    .flex;
+    flex-flow: column nowrap;
+    background: @hard-sand;
+} 
+
+.product-headers {
+    .flex;
+    flex-flow: row nowrap;
+    background: @wet-sand;
+}
+
+.product {
+    .flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+}
+
+.invisible {
+    display: none
+}
+
+.loader-image {
+    .flex;
+}

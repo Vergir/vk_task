@@ -11,8 +11,8 @@ $css_js = file_get_contents('./css_js.html');
 
 <!DOCTYPE html>
 <html>
-    <?php echo $css_js;?>
-    <body>
-        <?php echo $content;?>
-    </body>
+<?php echo $css_js;?>
+<body>
+<?php echo $content;?>
+</body>
 </html> 

@@ -20,7 +20,7 @@ $(window).scroll(function () {
             return;
         }
 
-        var elements = result.split("|");
+        var elements = result.split("|", 2);
         $(".load_products").attr("href", elements[0]);
         $(".product-list").append(elements[1]);
 
