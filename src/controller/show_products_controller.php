@@ -12,16 +12,26 @@ function show_products() {
         'start_from' => 0,
         'sort_by' => 'id',
         'ascending' => true);
+    if (!empty($_REQUEST['params'])) {
+        $request_params = explode('|', $_REQUEST['params']);
+        $params['sort_by'] = $request_params[0];
+        $params['ascending'] = $request_params[1];
+    }
 
     $data = get_products($params);
 
     if (!$data) {
-        $result = 'LMAO KEK';
+        return 'Error retrieveing products from Database';
     } else {
-        $result = skin_product_list($data);
+        $product_list = skin_product_list($data);
     }
 
-    return $result;
+    $header = skin_header($params);
+    $footer = skin_footer();
+    
+    $page = $header.$product_list.$footer;
+
+    return $page;
 }       
 
 ?>

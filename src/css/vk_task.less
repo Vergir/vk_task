@@ -1,10 +1,13 @@
-@cheap-soap: #fff0db;
-@mild-khaki: #b2a187;
+@cheap-soap: #e5b662;
 @skimmed-milk: #fffbf4;
 @old-jeans: #769ab2;
-@bottled-water: #dbf1ff;
 @christmas-snow: #ffffff;
 @omen-cloud: #aaaaaa;
+
+body {
+    margin: 0;
+    padding: 0;
+}
 
 .clearfix {
   display: block;
@@ -20,39 +23,105 @@
   }
 }
 
-.outer {
-    background: @skimmed-milk;
-    .clearfix;
+.header {
+    background: @cheap-soap;
+    padding: 5px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    
+    .app-name {
+        font-size: 36px;
+        margin-left: 10px;
+    }
+    
+    .header-buttons {
+        margin: 15px;
+        float: right;
+    }
+}
 
+.vert-line {
+  border-left: thick solid @omen-cloud;
+}
+
+.content {
     .product-list {
         margin: auto;
-        width: 80%;
+        width: 800px;
 
         .product {
-            height:220px;
+            .clearfix;
+            font-size: 16px;
+            background: @skimmed-milk;
+            border: 1px solid @omen-cloud;
+            margin-bottom: 15px;
+            &:first-child {
+                margin-top: 75px;
+            }
 
-            .product-img {
-                position: relative;
-                top: 50%;
-                transfrom: translate(0, -50%);
-                border: 1px solid @omen-cloud;
-                float: left;
-                background: @christmas-snow;
-                height: 200px;
-                width: 200px;
+            .product-corner {
+                color: @omen-cloud;
+                margin: 3px;
+                float: right;
+            
+                .product-corner-img {
+                    float: right;
 
-                .product-img-tag {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    height: auto; 
-                    width: auto; 
-                    max-width: 200px; 
-                    max-height: 200px;
+                    .product-corner-img-tag {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+                
+                .product-id {
+                    float: right;
+                    margin-left: 3px;
+                }
+            }
+            
+            .product-info {
+                .clearfix;
+                margin: 15px;
+
+                .product-img {
+                    border: 1px solid @omen-cloud;
+                    float: left;
+                    background: @christmas-snow;
+                    height: 200px;
+                    width: 200px;
+
+                    .product-img-tag {
+                        margin-left: 5px;
+                        margin-top: 5px;
+                        height: 190px; 
+                        width: 190px; 
+                    }
+                }
+
+                .product-text {
+                    float: left;
+                    margin-left: 10px;
+            
+                    .product-field {
+                        margin-bottom: 10px;
+
+                        .field-name {
+                            float: left;
+                            color: @old-jeans;
+                            padding-right: 5px;
+                        }
+                    }
+                
+                    .product-input {
+                        display: none;
+                    }
                 }
             }
         }
+    }
+
+    .loader-image {
     }
 }
 
@@ -60,5 +129,3 @@
     display: none
 }
 
-.loader-image {
-}

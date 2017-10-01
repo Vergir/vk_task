@@ -9,11 +9,10 @@ function construct_response($data) {
         $div_blocks .= skin_product_block($item);
     
     $params = $data['params'];
-    $new_counter = intval($params['start_from']) + intval($params['count']);
     $new_load_link = "load_products.php?".
                 "&sort=$params[sort_by]".
                 "&count=$params[count]".
-                "&start_from=$new_counter".
+                "&start_from=$params[start_from]".
                 "&asc=$params[ascending]";
 
     return $new_load_link.LINK_DELIMITER.$div_blocks;
@@ -26,9 +25,10 @@ function load_products() {
         return false;
     }
 
+    $new_start_pos = intval($_REQUEST['start_from']) + intval($_REQUEST['count']);
     $params = array(
         'count' => $_REQUEST['count'],
-        'start_from' => $_REQUEST['start_from'],
+        'start_from' => $new_start_pos,
         'sort_by' => $_REQUEST['sort'],
         'ascending' => $_REQUEST['asc']);
 

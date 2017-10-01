@@ -1,3 +1,7 @@
+function change_sorting(params) {
+    location.href = 'show_products.php?params='+params;
+}
+
 var isPreviousEventComplete = true,
     isDataAvailable = true
 
