@@ -1,29 +1,59 @@
-@hard-sand: #ffcb92;
-@wet-sand: #b28654;
-@light-sand: #ffd7ab;
-@sea: #4293b2;
-@sky: #92e0ff;
+@cheap-soap: #fff0db;
+@mild-khaki: #b2a187;
+@skimmed-milk: #fffbf4;
+@old-jeans: #769ab2;
+@bottled-water: #dbf1ff;
+@christmas-snow: #ffffff;
+@omen-cloud: #aaaaaa;
 
-.flex {
-    display: flex
+.clearfix {
+  display: block;
+  zoom: 1;
+
+  &:after {
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
 }
 
-.product-list {
-    .flex;
-    flex-flow: column nowrap;
-    background: @hard-sand;
-} 
+.outer {
+    background: @skimmed-milk;
+    .clearfix;
 
-.product-headers {
-    .flex;
-    flex-flow: row nowrap;
-    background: @wet-sand;
-}
+    .product-list {
+        margin: auto;
+        width: 80%;
 
-.product {
-    .flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
+        .product {
+            height:220px;
+
+            .product-img {
+                position: relative;
+                top: 50%;
+                transfrom: translate(0, -50%);
+                border: 1px solid @omen-cloud;
+                float: left;
+                background: @christmas-snow;
+                height: 200px;
+                width: 200px;
+
+                .product-img-tag {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    height: auto; 
+                    width: auto; 
+                    max-width: 200px; 
+                    max-height: 200px;
+                }
+            }
+        }
+    }
 }
 
 .invisible {
@@ -31,5 +61,4 @@
 }
 
 .loader-image {
-    .flex;
 }

@@ -3,6 +3,9 @@
 function skin_product_block($product) {
     $result = <<<HTML
 <div class="product">
+    <div class="product-field product-img">
+        <img class="product-img-tag" src="$product[4]">
+    </div>
     <div class="product-field product-id">
         $product[0];
     </div>
@@ -15,9 +18,6 @@ function skin_product_block($product) {
     <div class="product-field product-price">
         $product[3];
     </div>
-    <div class="product-field product-img">
-        <img class="product-img-tag" src="$product[4]">
-    </div>
 </div>
 
 HTML;
@@ -26,12 +26,13 @@ HTML;
 }
 
 function skin_list_header() {
+    return false;
     $fields = array(
+        'img' => 'Image',
         'id' => 'ID',
         'name' => 'Name',
         'desc' => 'Description',
-        'price' => 'Price',
-        'img' => 'Image');
+        'price' => 'Price');
     $headers = '';
     foreach ($fields as $col_key => $col_value) {
       $headers .= <<<HTML
@@ -54,6 +55,7 @@ HTML;
 function skin_product_list($data) {
     $list_header = skin_list_header();
     $list = '';
+    $list_items = '';
     foreach ($data['products'] as $item) {
         $list .= skin_product_block($item);
     }
@@ -71,8 +73,16 @@ function skin_product_list($data) {
 </div>
 <img class="loader-image" src="https://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif"></img>
 HTML;
+    
+    $result = <<<HTML
+<div class="outer">
+$list_header
+$list_items
+</div>
 
-    return $list_header.$list_items;
+HTML;
+
+    return $result;
 }
 
 

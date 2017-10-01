@@ -22,7 +22,6 @@ function get_products($params) {
 
     $cache_result = cache_get($hash);
     if ($cache_result) {
-        error_log('cache');
         $result['products'] = $cache_result;
         return $result;
     } else { 
