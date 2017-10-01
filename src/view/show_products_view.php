@@ -1,5 +1,48 @@
 <?php 
 
+function skin_create_modal() {
+    $result =<<<HTML
+
+<div class="modal create-modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="close_create_modal_click()">&times;</span>
+    <div class="input-field-names">
+        <div class="input-field-name">
+            Name:
+        </div>
+        <div class="input-field-name">
+            Price:
+        </div>
+        <div class="input-field-name">
+            Image Source:
+        </div>
+        <div class="input-field-name">
+            Description:
+        </div>
+    </div>
+    <div class="input-fields">
+        <div class="input-field">
+            <input class="create-input-name" maxlength="100" type="text"></input>
+        </div>
+        <div class="input-field">
+            <input class="create-input-price" maxlength="10" type="text"></input>
+        </div>
+        <div class="input-field">
+            <input class="create-input-img" type="url"></input>
+        </div>
+        <div class="input-field input-field-textarea">
+            <textarea class="create-input-desc" maxlength="2000"></textarea>
+        </div>
+    </div>
+    <input class="create-confirm-button" type=submit onclick="confirm_create_click()" value="CREATE"></input>
+  </div>
+</div> 
+
+HTML;
+
+    return $result;
+}
+
 function skin_header($params) {
     $columns = array('id' => 'ID', 'price' => 'Price');
     $options = '';
@@ -30,7 +73,7 @@ HTML;
         <select class="sorting-select">
             $options
         </select>
-        <button class="create-button">
+        <button class="create-button" onclick="create_button_click()">
             CREATE
         </button>
     </span>
@@ -73,18 +116,18 @@ function skin_product_block($product) {
         <div class="product-text">
             <div class="product-field product-name">
                 <span class="field-name">
-                    Name: 
+                    Name:
                 </span>
                 <input class="product-input" type="text" maxlength="100" name="name" value="$product[1]"></input>
                 <span class="product-label">
-                    $product[1] 
+                    $product[1]
                 </span>
             </div>
             <div class="product-field product-price">
                 <span class="field-name">
                     Price: 
                 </span>
-                <input class="product-input" type="number" name="price" maxlength="10" value="$product[3]"></input>
+                <input class="product-input" type="text" name="price" maxlength="10" value="$product[3]"></input>
                 <span>
                     $product[3] 
                 </span>

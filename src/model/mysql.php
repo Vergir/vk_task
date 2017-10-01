@@ -50,13 +50,13 @@ function mysql_insert($name, $desc, $price, $img) {
      || empty($desc)
      || empty($price)
      || empty($img)
-     || price < 0) {
+     || $price < 0) {
         return false;
     }
 
     $query = 'INSERT '.
-             'INTO products(id, name, desc, price, img) '.
-             "VALUES ($name, $desc, $price, $img)";
+             'INTO products(`name`, `desc`, `price`, `img`) '.
+             "VALUES ('$name', '$desc', $price, '$img')";
 
     $result = mysqli_query($mysqli, $query);
     if (!$result) {

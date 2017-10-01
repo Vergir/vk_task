@@ -28,8 +28,9 @@ function show_products() {
 
     $header = skin_header($params);
     $footer = skin_footer();
+    $create_product_modal = skin_create_modal();
     
-    $page = $header.$product_list.$footer;
+    $page = $header.$product_list.$footer.$create_product_modal;
 
     return $page;
 }       

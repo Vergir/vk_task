@@ -2,8 +2,40 @@ function change_sorting(params) {
     location.href = 'show_products.php?params='+params;
 }
 
-var isPreviousEventComplete = true,
-    isDataAvailable = true
+function close_create_modal_click() {
+    $(".create-modal").css('display', 'none');
+}
+
+function create_button_click() {
+    $(".create-modal").css('display', 'block');
+}
+
+function confirm_create_click() {
+    $(".create-modal").css('display', 'none');
+
+    $.ajax({
+      type: "POST",
+      url: "add_product.php",
+      data: {
+        'name': $(".create-input-name").val(),
+        'price': $(".create-input-price").val(),
+        'img': $(".create-input-img").val(),
+        'desc': $(".create-input-desc").val(),
+      },
+      success: function (result) {
+        alert(result);
+        $(".create-input-name").val('');
+        $(".create-input-price").val('');
+        $(".create-input-img").val('');
+        $(".create-input-desc").val('');
+      },
+      error: function (error) {
+          console.log(error);
+      }
+    });
+}
+
+var isPreviousEventComplete = true, isDataAvailable = true;
 
 $(window).scroll(function () {
  if ($(document).height() - 50 <= $(window).scrollTop() + $(window).height()) {
@@ -31,4 +63,8 @@ $(window).scroll(function () {
       },
       error: function (error) {
           console.log(error);
-      }});}}});
+      }
+    });
+  }
+ }
+});
