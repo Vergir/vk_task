@@ -2,15 +2,43 @@ function change_sorting(params) {
     location.href = 'show_products.php?params='+params;
 }
 
-function close_create_modal_click() {
-    $(".create-modal").css('display', 'none');
+function close_modal(modal) {
+    $(modal).css('display', 'none');
 }
 
-function create_button_click() {
-    $(".create-modal").css('display', 'block');
+function show_modal(modal) {
+    $(modal).css('display', 'block');
 }
 
-function confirm_create_click() {
+function delete_product(id) {
+    if (confirm("Are you sure you want to delete product #" + id + "?") != true) {
+        return;
+    }
+    
+    $.ajax({
+      type: "POST",
+      url: "delete_product.php",
+      data: {
+        'id': id,
+      },
+      success: function (result) {
+        strings = result.split("|");
+        status = strings[0];
+        user_message = strings[1];
+
+        if (status == "success") {
+           $("#product"+id).fadeOut(); 
+        } else {
+            alert(user_message);
+        }
+      },
+      error: function (error) {
+          console.log(error);
+      }
+    });
+}
+
+function confirm_create() {
     $(".create-modal").css('display', 'none');
 
     $.ajax({
@@ -51,7 +79,7 @@ $(window).scroll(function () {
         isPreviousEventComplete = true;
         $(".loader-image").css("display", "none");
 
-        if (result == '') { //When data is not available
+        if (result == '') {
             isDataAvailable = false;
             return;
         }

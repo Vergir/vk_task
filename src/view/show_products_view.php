@@ -5,7 +5,7 @@ function skin_create_modal() {
 
 <div class="modal create-modal">
   <div class="modal-content">
-    <span class="close-modal" onclick="close_create_modal_click()">&times;</span>
+    <span class="close-modal" onclick="close_modal('.create-modal')">&times;</span>
     <div class="input-field-names">
         <div class="input-field-name">
             Name:
@@ -34,7 +34,7 @@ function skin_create_modal() {
             <textarea class="create-input-desc" maxlength="2000"></textarea>
         </div>
     </div>
-    <input class="create-confirm-button" type=submit onclick="confirm_create_click()" value="CREATE"></input>
+    <input class="create-confirm-button" type=submit onclick="confirm_create()" value="CREATE"></input>
   </div>
 </div> 
 
@@ -73,7 +73,7 @@ HTML;
         <select class="sorting-select">
             $options
         </select>
-        <button class="create-button" onclick="create_button_click()">
+        <button class="create-button" onclick="show_modal('.create-modal')">
             CREATE
         </button>
     </span>
@@ -97,13 +97,13 @@ HTML;
 
 function skin_product_block($product) {
     $result = <<<HTML
-<div class="product">
+<div id="product$product[0]" class="product">
     <div class="product-corner">
         <div class="product-id">
             #$product[0]
         </div>
         <div class="product-corner-img product-delete">
-            <img class="product-corner-img-tag product-delete-tag" src="resources/delete.png"></img>
+            <img class="product-corner-img-tag product-delete-tag" src="resources/delete.png" onclick="delete_product($product[0])"></img>
         </div>
         <div class="product-corner-img product-edit">
             <img class="product-corner-img-tag product-edit-tag" src="resources/edit.png"></img>
