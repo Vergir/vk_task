@@ -55,10 +55,10 @@ function skin_header($params) {
             $selected_desc = false;
         }
         $options .= <<<HTML
-<option onclick="change_sorting('$col_key|1')" $selected_asc>
+<option value="$col_key|1" $selected_asc>
     $col_val - Ascending
 </option>
-<option onclick="change_sorting('$col_key|0')" $selected_desc>
+<option value="$col_key|0" $selected_desc>
     $col_val - Descending
 </option>
 

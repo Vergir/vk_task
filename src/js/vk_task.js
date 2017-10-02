@@ -1,7 +1,3 @@
-function change_sorting(params) {
-    location.href = 'show_products.php?params='+params;
-}
-
 function close_modal(modal) {
     $(modal).css('display', 'none');
 }
@@ -30,12 +26,15 @@ function cancel_edit(id) {
     });
     product.find(".product-field-img").css('display','none');
     product.find(".product-img-tag").attr('src', product.find(".product-img-tag").attr('data-src'));
+    product.find(".product-delete-tag").attr('src','/resources/delete.png');
 }
 
 function start_edit(id) {
+    product = $("#edit"+id).parents(".product");
+
     $("#edit"+id).css('display','none');
     $("#confirm"+id).css('display','block');
-    var product = $("#edit"+id).parents(".product");
+    product.find(".product-delete-tag").attr('src','/resources/delete-black.png');
 
     product.find(".product-input").each(function() {
         $(this).val(($.trim($(this).next("span").text())));
@@ -71,6 +70,7 @@ function save_edit(id) {
             product.find(".product-field-img").css('display','none');
             product.find(".product-img-tag").attr('data-src', product.find(".product-input-img").val());
             product.find(".product-img-tag").attr('src', product.find(".product-input-img").val());
+            product.find(".product-delete-tag").attr('src','/resources/delete.png');
 
             $("#edit"+id).css('display','block');
             $("#confirm"+id).css('display','none');
@@ -139,7 +139,6 @@ function confirm_create() {
 }
 
 var isPreviousEventComplete = true, isDataAvailable = true;
-
 $(window).scroll(function () {
  if ($(document).height() - 50 <= $(window).scrollTop() + $(window).height()) {
   if (isPreviousEventComplete && isDataAvailable) {
@@ -170,4 +169,10 @@ $(window).scroll(function () {
     });
   }
  }
+});
+
+$(function() {
+    $('.sorting-select').on('change', function() {
+        location.href = 'show_products.php?params='+this.value;
+    })
 });
