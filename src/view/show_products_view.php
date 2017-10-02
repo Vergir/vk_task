@@ -103,22 +103,25 @@ function skin_product_block($product) {
             #$product[0]
         </div>
         <div class="product-corner-img product-delete">
-            <img class="product-corner-img-tag product-delete-tag" src="resources/delete.png" onclick="delete_product($product[0])"></img>
+            <img class="product-corner-img-tag product-delete-tag" src="resources/delete.png" onclick="click_delete($product[0])"></img>
         </div>
-        <div class="product-corner-img product-edit">
-            <img class="product-corner-img-tag product-edit-tag" src="resources/edit.png"></img>
+        <div id="edit$product[0]" class="product-corner-img product-edit">
+            <img class="product-corner-img-tag product-edit-tag" src="resources/edit.png" onclick="start_edit($product[0])"></img>
+        </div>
+        <div id="confirm$product[0]" class="product-corner-img product-confirm">
+            <img class="product-corner-img-tag product-confirm-tag" src="resources/confirm.png" onclick="save_edit($product[0])"></img>
         </div>
     </div>
     <div class="product-info">
         <div class="product-img">
-            <img class="product-img-tag" src="$product[4]">
+            <img class="product-img-tag" data-src="$product[4]" src="$product[4]">
         </div>
         <div class="product-text">
             <div class="product-field product-name">
                 <span class="field-name">
                     Name:
                 </span>
-                <input class="product-input" type="text" maxlength="100" name="name" value="$product[1]"></input>
+                <input class="product-input product-input-name" type="text" maxlength="100" name="name" value="$product[1]"></input>
                 <span class="product-label">
                     $product[1]
                 </span>
@@ -127,17 +130,23 @@ function skin_product_block($product) {
                 <span class="field-name">
                     Price: 
                 </span>
-                <input class="product-input" type="text" name="price" maxlength="10" value="$product[3]"></input>
-                <span>
+                <input class="product-input product-input-price" type="text" name="price" maxlength="10" value="$product[3]"></input>
+                <span class="product-label">
                     $product[3] 
                 </span>
+            </div>
+            <div class="product-field product-field-img">
+                <span class="field-name">
+                    Image Source: 
+                </span>
+                <input class="product-input product-input-img" type="url" name="img" maxlength="2000" value=""></input>
             </div>
             <div class="product-field product-desc">
                 <span class="field-name">
                     Description:
                 </span>
-                <textarea class="product-input" name="desc" maxlength="2000">$product[2]</textarea>
-                <span>
+                <textarea class="product-input product-input-desc" name="desc" maxlength="2000">$product[2]</textarea>
+                <span class="product-label">
                     $product[2]
                 </span>
             </div>

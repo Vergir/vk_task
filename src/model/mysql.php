@@ -74,12 +74,12 @@ function mysql_update($old_id, $name, $desc, $price, $img) {
      || empty($desc)
      || empty($price)
      || empty($img)
-     || price < 0) {
+     || $price < 0) {
         return false;
     }
 
-    $query = 'UPDATE products'.
-             "SET name=$name, desc=$desc, price=$price, img=$img ".
+    $query = 'UPDATE products '.
+             "SET `name`='$name',`desc`='$desc',`price`=$price,`img`='$img' ".
              "WHERE id=$old_id";
 
     $result = mysqli_query($mysqli, $query);

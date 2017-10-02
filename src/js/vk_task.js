@@ -10,6 +10,81 @@ function show_modal(modal) {
     $(modal).css('display', 'block');
 }
 
+function click_delete(id) {
+    if ($("#edit"+id).css('display') == 'block') {
+        delete_product(id);
+    } else {
+        cancel_edit(id);
+    }
+}
+
+function cancel_edit(id) {
+    $("#edit"+id).css('display','block');
+    $("#confirm"+id).css('display','none');
+    var product = $("#edit"+id).parents(".product");
+
+    product.find(".product-input").each(function() {
+        $(this).val(($.trim($(this).next("span").text())));
+        $(this).next("span").css('display','inline');
+        $(this).css('display','none');
+    });
+    product.find(".product-field-img").css('display','none');
+    product.find(".product-img-tag").attr('src', product.find(".product-img-tag").attr('data-src'));
+}
+
+function start_edit(id) {
+    $("#edit"+id).css('display','none');
+    $("#confirm"+id).css('display','block');
+    var product = $("#edit"+id).parents(".product");
+
+    product.find(".product-input").each(function() {
+        $(this).val(($.trim($(this).next("span").text())));
+        $(this).next("span").css('display','none');
+        $(this).css('display','inline');
+    });
+
+    product.find(".product-field-img").css('display','block');
+    product.find(".product-img-tag").attr('src', 'resources/question.png');
+    
+}
+
+function save_edit(id) {
+    var product = $("#edit"+id).parents(".product");
+
+    $.ajax({
+      type: "POST",
+      url: "update_product.php",
+      data: {
+        'old_id': id,
+        'name': product.find(".product-input-name").val(),
+        'price': product.find(".product-input-price").val(),
+        'img': product.find(".product-input-img").val(),
+        'desc': product.find(".product-input-desc").val(),
+      },
+      success: function (result) {
+        if (result == "success") {
+            product.find(".product-label").each(function() {
+                $(this).text(($(this).prev(".product-input").val()));
+                $(this).prev(".product-input").css('display','none');
+                $(this).css('display','inline');
+            });
+            product.find(".product-field-img").css('display','none');
+            product.find(".product-img-tag").attr('data-src', product.find(".product-input-img").val());
+            product.find(".product-img-tag").attr('src', product.find(".product-input-img").val());
+
+            $("#edit"+id).css('display','block');
+            $("#confirm"+id).css('display','none');
+
+        } else {
+            alert(result);
+        }
+      },
+      error: function (error) {
+          console.log(error);
+      }
+    });
+}
+
 function delete_product(id) {
     if (confirm("Are you sure you want to delete product #" + id + "?") != true) {
         return;
