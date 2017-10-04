@@ -5,7 +5,7 @@ function skin_create_modal() {
 
 <div class="modal create-modal">
   <div class="modal-content">
-    <span class="close-modal" onclick="close_modal('.create-modal')">&times;</span>
+    <span class="close-modal" onclick="close_create_modal()">&times;</span>
     <div class="input-field-names">
         <div class="input-field-name">
             Name:
@@ -22,16 +22,16 @@ function skin_create_modal() {
     </div>
     <div class="input-fields">
         <div class="input-field">
-            <input class="create-input-name" maxlength="100" type="text"></input>
+            <input class="create-input-name" maxlength="100" type="text" onfocus="reset_border(this)"></input>
         </div>
         <div class="input-field">
-            <input class="create-input-price" maxlength="10" type="text"></input>
+            <input class="create-input-price" maxlength="10" type="text" onfocus="reset_border(this)"></input>
         </div>
         <div class="input-field">
-            <input class="create-input-img" type="url"></input>
+            <input class="create-input-img" type="url" onfocus="reset_border(this)"></input>
         </div>
         <div class="input-field input-field-textarea">
-            <textarea class="create-input-desc" maxlength="2000"></textarea>
+            <textarea class="create-input-desc" maxlength="2000" onfocus="reset_border(this)"></textarea>
         </div>
     </div>
     <input class="create-confirm-button" type=submit onclick="confirm_create()" value="CREATE"></input>
@@ -73,7 +73,7 @@ HTML;
         <select class="sorting-select">
             $options
         </select>
-        <button class="create-button" onclick="show_modal('.create-modal')">
+        <button class="create-button" onclick="show_create_modal()">
             CREATE
         </button>
     </span>
@@ -121,7 +121,7 @@ function skin_product_block($product) {
                 <span class="field-name">
                     Name:
                 </span>
-                <input class="product-input product-input-name" type="text" maxlength="100" name="name" value="$product[1]"></input>
+                <input class="product-input product-input-name" type="text" maxlength="100" name="name" value="$product[1]" onfocus="reset_border(this)"></input>
                 <span class="product-label">
                     $product[1]
                 </span>
@@ -130,7 +130,7 @@ function skin_product_block($product) {
                 <span class="field-name">
                     Price: 
                 </span>
-                <input class="product-input product-input-price" type="text" name="price" maxlength="10" value="$product[3]"></input>
+                <input class="product-input product-input-price" type="text" name="price" maxlength="10" value="$product[3]"  onfocus="reset_border(this)"></input>
                 <span class="product-label">
                     $product[3] 
                 </span>
@@ -139,13 +139,13 @@ function skin_product_block($product) {
                 <span class="field-name">
                     Image Source: 
                 </span>
-                <input class="product-input product-input-img" type="url" name="img" maxlength="2000" value=""></input>
+                <input class="product-input product-input-img" type="url" name="img" maxlength="2000" value="" onfocus="reset_border(this)"></input>
             </div>
             <div class="product-field product-desc">
                 <span class="field-name">
                     Description:
                 </span>
-                <textarea class="product-input product-input-desc" name="desc" maxlength="2000">$product[2]</textarea>
+                <textarea class="product-input product-input-desc" name="desc" maxlength="2000" onfocus="reset_border(this)">$product[2]</textarea>
                 <span class="product-label">
                     $product[2]
                 </span>

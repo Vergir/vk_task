@@ -19,8 +19,6 @@ function construct_response($data) {
 }
 
 function load_products() {
-    //TODO: More validation/sanitization
-    
     if (!init_data_access()) {
         return false;
     }

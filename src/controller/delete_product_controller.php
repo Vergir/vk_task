@@ -2,7 +2,6 @@
 require_once(__ROOT__.'/model/data_access.php');
 
 function try_delete_product() {
-    //TODO: better validation / sanitization
     if (empty($_REQUEST['id']) || !is_numeric($_REQUEST['id'])) {
         return "error|Product was NOT removed - Invalid ID";
     }

@@ -1,9 +1,61 @@
-function close_modal(modal) {
-    $(modal).css('display', 'none');
+function reset_border(element) {
+    $(element).css('border','1px solid grey');
+}
+function validate_product_fields(product) {
+    var name, price, img, desc;
+
+    if (product == null) { 
+        name  = $(".create-input-name");
+        price = $(".create-input-price");
+        img   = $(".create-input-img");
+        desc  = $(".create-input-desc");
+    } else {
+        name  = product.find(".product-input-name");
+        price = product.find(".product-input-price");
+        img   = product.find(".product-input-img");
+        desc  = product.find(".product-input-desc");
+    }
+
+    validation_passed = true;
+
+    if (!$(name).val() || $(name).val().length > 1000) {
+        $(name).css('border', '1px solid red');
+        validation_passed = false;
+    }
+    if ( !$.isNumeric($(price).val()) || $(price).val().length > 10 || $(price).val() < 0.0) {
+        $(price).css('border', '1px solid red');
+        validation_passed = false;
+    }
+    if ($(img).val().length > 2000) {
+        $(img).css('border', '1px solid red');
+        validation_passed = false;
+    }
+    if ($(desc).val().length > 2000) {
+        $(desc).css('border', '1px solid red');
+        validation_passed = false;
+    }
+
+    return validation_passed;
 }
 
-function show_modal(modal) {
-    $(modal).css('display', 'block');
+function close_create_modal() {
+    $(".create-modal").css('display', 'none');
+    reset_border($(".create-input-name"));
+    $(".create-input-name").val('');
+
+    reset_border($(".create-input-price"));
+    $(".create-input-price").val('');
+
+    reset_border($(".create-input-img"));
+    $(".create-input-img").val('');
+
+    reset_border($(".create-input-desc"));
+    $(".create-input-desc").val('');
+
+}
+
+function show_create_modal() {
+    $(".create-modal").css('display', 'block');
 }
 
 function click_delete(id) {
@@ -21,6 +73,7 @@ function cancel_edit(id) {
 
     product.find(".product-input").each(function() {
         $(this).val(($.trim($(this).next("span").text())));
+        reset_border(this);
         $(this).next("span").css('display','inline');
         $(this).css('display','none');
     });
@@ -43,12 +96,15 @@ function start_edit(id) {
     });
 
     product.find(".product-field-img").css('display','block');
+    product.find(".product-input-img").val(product.find(".product-img-tag").attr('data-src'));
     product.find(".product-img-tag").attr('src', 'resources/question.png');
-    
 }
 
 function save_edit(id) {
     var product = $("#edit"+id).parents(".product");
+    if (!validate_product_fields(product)) {
+        return;
+    }
 
     $.ajax({
       type: "POST",
@@ -114,7 +170,10 @@ function delete_product(id) {
 }
 
 function confirm_create() {
-    $(".create-modal").css('display', 'none');
+    if (!validate_product_fields()) {
+        return;
+    }
+
 
     $.ajax({
       type: "POST",
@@ -136,6 +195,8 @@ function confirm_create() {
           console.log(error);
       }
     });
+
+    close_create_modal();
 }
 
 var isPreviousEventComplete = true, isDataAvailable = true;
