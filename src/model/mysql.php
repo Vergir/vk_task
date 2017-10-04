@@ -21,19 +21,19 @@ function init_mysql() {
 function mysql_select($count = 1000, $start_from = 0, $sort_by = 'id', $ascending = true) {
     global $mysqli;
 
-    if (!in_array($sort_by, COLUMNS) 
-     || !is_numeric($start_from)
-     || !is_numeric($count) 
-     || !($start_from >= 0)
-     || !($count > 0)) {
-        return false;
-    }
+    $count      = mysqli_real_escape_string($mysqli, $count);
+    $start_from = mysqli_real_escape_string($mysqli, $start_from);
+    $sort_by    = mysqli_real_escape_string($mysqli, $sort_by);
+    $ascending  = mysqli_real_escape_string($mysqli, $ascending);
+
     $asc_desc = $ascending ? 'ASC' : 'DESC';
 
-    $query = 'SELECT * '. 
-             'FROM products '.
-             "ORDER BY $sort_by $asc_desc ".
-             "LIMIT $start_from,$count";
+    $query = <<<SQL
+SELECT * 
+FROM products
+ORDER BY $sort_by $asc_desc
+LIMIT $start_from,$count
+SQL;
 
     $result = mysqli_query($mysqli, $query);
     if (!$result) {
@@ -46,17 +46,17 @@ function mysql_select($count = 1000, $start_from = 0, $sort_by = 'id', $ascendin
 function mysql_insert($name, $desc, $price, $img) {
     global $mysqli;
 
-    if (empty($name)
-     || empty($desc)
-     || empty($price)
-     || empty($img)
-     || $price < 0) {
-        return false;
-    }
 
-    $query = 'INSERT '.
-             'INTO products(`name`, `desc`, `price`, `img`) '.
-             "VALUES ('$name', '$desc', $price, '$img')";
+    $name  = mysqli_real_escape_string($mysqli, $name);
+    $desc  = mysqli_real_escape_string($mysqli, $desc);
+    $price = mysqli_real_escape_string($mysqli, $price);
+    $img   = mysqli_real_escape_string($mysqli, $img);
+
+    $query = <<<SQL
+INSERT
+INTO products(`name`, `desc`, `price`, `img`)
+VALUES ('$name', '$desc', $price, '$img')
+SQL;
 
     $result = mysqli_query($mysqli, $query);
     if (!$result) {
@@ -69,18 +69,17 @@ function mysql_insert($name, $desc, $price, $img) {
 function mysql_update($old_id, $name, $desc, $price, $img) {
     global $mysqli;
 
-    if (empty($old_id)
-     || empty($name)
-     || empty($desc)
-     || empty($price)
-     || empty($img)
-     || $price < 0) {
-        return false;
-    }
+    $old_id = mysqli_real_escape_string($mysqli, $old_id);
+    $name   = mysqli_real_escape_string($mysqli, $name);
+    $desc   = mysqli_real_escape_string($mysqli, $desc);
+    $price  = mysqli_real_escape_string($mysqli, $price);
+    $img    = mysqli_real_escape_string($mysqli, $img);
 
-    $query = 'UPDATE products '.
-             "SET `name`='$name',`desc`='$desc',`price`=$price,`img`='$img' ".
-             "WHERE id=$old_id";
+    $query  = <<<SQL
+UPDATE products
+SET `name`='$name',`desc`='$desc',`price`=$price,`img`='$img'
+WHERE id=$old_id
+SQL;
 
     $result = mysqli_query($mysqli, $query);
     if (!$result) {
@@ -93,13 +92,13 @@ function mysql_update($old_id, $name, $desc, $price, $img) {
 function mysql_delete($id) {
     global $mysqli;
 
-    if (empty($id))  {
-        return false;
-    }
+    $id = mysqli_real_escape_string($mysqli, $id);
 
-    $query = 'DELETE '.
-             'FROM products '.
-             "WHERE id=$id";
+    $query = <<<SQL
+DELETE
+FROM products
+WHERE id=$id
+SQL;
 
     $result = mysqli_query($mysqli, $query);
     if (!$result) {
