@@ -61,5 +61,4 @@ function delete_product($params) {
 
     return $query_result;
 }
-
 ?>
