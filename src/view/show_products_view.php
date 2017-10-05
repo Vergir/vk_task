@@ -70,7 +70,7 @@ HTML;
         🅱️roduct Mana🅱️er
     </span>
     <span class="header-buttons">
-        <select class="sorting-select">
+        <select class="sorting-select" onchange="change_sorting(this)">
             $options
         </select>
         <button class="create-button" onclick="show_create_modal()">
@@ -178,7 +178,7 @@ function skin_product_list($data) {
 
     $list_items .= <<<HTML
 <div class="content">
-    <a class="load_products invisible" href="/load_products.php?$request_params"></a>
+    <a class="load-products-link invisible" href="/load_products.php?$request_params"></a>
     <div class="product-list">
         $list
     </div>

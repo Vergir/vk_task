@@ -19,6 +19,14 @@ function receive_params() {
     return $result;
 }
 
+function adjust_loading_link(&$data) {
+    $params = $data['params'];
+
+    $new_start_pos = intval($params['start_from']) + intval($params['count']);
+
+    $data['params']['start_from'] = $new_start_pos;
+}
+
 function show_products() {
     if (!init_data_access()) {
         return "Could not estabilish data access";
@@ -31,6 +39,8 @@ function show_products() {
     if (!$data) {
         return 'Error retrieving products from Database';
     }
+
+    adjust_loading_link($data);
 
     $header               = skin_header($params);
     $product_list         = skin_product_list($data);
