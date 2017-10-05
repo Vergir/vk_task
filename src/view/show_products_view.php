@@ -96,6 +96,10 @@ HTML;
 }
 
 function skin_product_block($product) {
+    foreach ($product as &$field) {
+        $field = htmlspecialchars($field);
+    }
+
     $result = <<<HTML
 <div id="product$product[0]" class="product">
     <div class="product-corner">
